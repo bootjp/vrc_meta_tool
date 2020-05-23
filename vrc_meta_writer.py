@@ -44,6 +44,7 @@ class LogToolBase:
 
 # 本体
 class VrcMetaTool(LogToolBase):
+    version = os.environ.get("GITHUB_SHA")
     config = {}
     user_names = []
     events = {}
@@ -145,6 +146,7 @@ class VrcMetaTool(LogToolBase):
 
 
 def main():
+
     config = {}
     with open("config.yml", "r", encoding="utf-8") as conf:
         config = yaml.load(conf, Loader=yaml.SafeLoader)
@@ -171,6 +173,7 @@ def main():
         log_file = select_log()
 
     vrc_meta_tool = VrcMetaTool(config, user_names)
+    print("Version:\t" + vrc_meta_tool.version)
 
     with open(log_file, "r", encoding="utf-8") as f:
         print("open logfile : ", log_file)
